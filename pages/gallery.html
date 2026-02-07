@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Empower Africa Network</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #2E8B57;
+            --dark-green: #1E6B47;
+            --light-green: #E8F5E9;
+            --terracotta: #D2691E;
+            --accent-yellow: #FFD700;
+            --dark-blue: #1A5276;
+            --light-blue: #EBF5FB;
+            --text-dark: #333333;
+            --text-light: #666666;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--white);
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: var(--dark-green);
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--primary-green);
+            position: relative;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background-color: var(--terracotta);
+            border-radius: 2px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--dark-blue);
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--terracotta), #E67E22);
+            color: var(--white);
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(210, 105, 30, 0.2);
+        }
+
+        .btn:hover {
+            background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--terracotta);
+            color: var(--terracotta);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--terracotta);
+            color: var(--white);
+        }
+
+        .section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-img {
+            height: 60px;
+            width: auto;
+            border-radius: 8px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text h1 {
+            font-size: 1.8rem;
+            margin-bottom: 0;
+            color: var(--dark-green);
+        }
+
+        .logo-text .tagline {
+            font-size: 0.9rem;
+            color: var(--terracotta);
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            font-weight: 600;
+            color: var(--text-dark);
+            position: relative;
+            padding: 5px 0;
+            font-size: 1rem;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-green);
+        }
+
+        nav ul li a.active {
+            color: var(--primary-green);
+        }
+
+        nav ul li a.active:after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-green);
+            border-radius: 2px;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--dark-green);
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Page Hero */
+        .page-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/gallery-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+            padding: 180px 0 100px;
+            margin-top: 80px;
+            position: relative;
+        }
+
+        .page-hero h1 {
+            color: var(--white);
+            font-size: 3.2rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .page-hero p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Gallery Filter */
+        .gallery-filter {
+            background: var(--light-gray);
+            padding: 30px 0;
+            position: sticky;
+            top: 80px;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .filter-btn {
+            padding: 10px 25px;
+            background: var(--white);
+            border: 2px solid transparent;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--primary-green);
+            color: var(--white);
+            border-color: var(--primary-green);
+        }
+
+        .filter-btn.active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(46, 139, 87, 0.2);
+        }
+
+        /* Gallery Grid */
+        .gallery-grid {
+            padding: 60px 0;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            cursor: pointer;
+            aspect-ratio: 4/3;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 30px 20px 20px;
+            color: var(--white);
+            transform: translateY(100%);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .gallery-category {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            display: inline-block;
+            padding: 4px 12px;
+            background: var(--terracotta);
+            border-radius: 20px;
+            margin-bottom: 10px;
+        }
+
+        .gallery-description {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* Lightbox Modal */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: var(--border-radius);
+        }
+
+        .lightbox-caption {
+            position: absolute;
+            bottom: -60px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: var(--white);
+            padding: 20px;
+        }
+
+        .lightbox-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .lightbox-description {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: var(--terracotta);
+            color: var(--white);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .lightbox-close:hover {
+            background: var(--primary-green);
+            transform: rotate(90deg);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: var(--transition);
+            backdrop-filter: blur(5px);
+        }
+
+        .lightbox-nav:hover {
+            background: var(--terracotta);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        /* Video Gallery */
+        .video-section {
+            background: var(--light-blue);
+            padding: 80px 0;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .video-item {
+            position: relative;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .video-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .video-thumbnail {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-play {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: rgba(210, 105, 30, 0.9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .video-play:hover {
+            background: var(--terracotta);
+            transform: translate(-50%, -50%) scale(1.1);
+        }
+
+        .video-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 20px;
+            color: var(--white);
+        }
+
+        .video-caption h4 {
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+
+        /* Impact Stats */
+        .impact-stats {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--dark-green), var(--primary-green));
+            color: var(--white);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--accent-yellow);
+            margin-bottom: 10px;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .stat-text {
+            font-weight: 600;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Call to Action */
+        .cta-section {
+            background: var(--light-green);
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            color: var(--dark-green);
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, var(--dark-green) 0%, #145A32 100%);
+            color: var(--white);
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h3 {
+            color: var(--white);
+            margin-bottom: 25px;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--terracotta);
+            border-radius: 2px;
+        }
+
+        .footer-col p {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.8;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            transition: var(--transition);
+            display: inline-block;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-yellow);
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--terracotta);
+            transform: translateY(-3px);
+            color: var(--white);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .gallery-container {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            .page-hero h1 { font-size: 2.8rem; }
+            .video-grid { grid-template-columns: 1fr; }
+            .gallery-container { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            .header-container { padding: 12px 0; }
+            
+            nav {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 80px);
+                background-color: var(--white);
+                transition: var(--transition);
+                box-shadow: var(--shadow);
+                z-index: 999;
+                padding: 40px 30px;
+            }
+
+            nav.active {
+                left: 0;
+            }
+
+            nav ul {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .page-hero {
+                padding: 150px 0 80px;
+                margin-top: 70px;
+            }
+
+            .page-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .page-hero p {
+                font-size: 1.1rem;
+            }
+
+            .section {
+                padding: 80px 0;
+            }
+
+            .gallery-filter {
+                padding: 20px 0;
+            }
+
+            .filter-container {
+                gap: 10px;
+            }
+
+            .filter-btn {
+                padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            .gallery-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
+
+            .lightbox-title {
+                font-size: 1.2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .section {
+                padding: 60px 0;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            .page-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .page-hero p {
+                font-size: 1rem;
+            }
+
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .logo-img {
+                height: 50px;
+            }
+
+            .logo-text h1 {
+                font-size: 1.3rem;
+            }
+
+            .logo-text .tagline {
+                font-size: 0.8rem;
+            }
+
+            .video-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="images/logo.jpeg" alt="EAN Logo" class="logo-img">
+                <div class="logo-text">
+                    <h1>EAN</h1>
+                    <div class="tagline">Empower Africa Network</div>
+                </div>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav" aria-label="Main navigation">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="gallery.html" class="active">Gallery</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Our Gallery</h1>
+            <p>Visual stories of transformation, impact, and community empowerment across Africa</p>
+        </div>
+    </section>
+
+    <!-- Gallery Filter -->
+    <section class="gallery-filter">
+        <div class="container filter-container">
+            <button class="filter-btn active" data-filter="all">All Photos</button>
+            <button class="filter-btn" data-filter="training">Skills Training</button>
+            <button class="filter-btn" data-filter="education">Education</button>
+            <button class="filter-btn" data-filter="community">Community Support</button>
+            <button class="filter-btn" data-filter="events">Events</button>
+            <button class="filter-btn" data-filter="success">Success Stories</button>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="gallery-grid">
+        <div class="container">
+            <div class="gallery-container" id="galleryContainer">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item" data-category="training">
+                    <img src="images/gallery-training1.jpg" alt="Women's Soap Making Training" class="gallery-img" loading="lazy" onerror="this.src='images/ngo1.jpeg'">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Training</span>
+                        <h4 class="gallery-title">Soap Making Workshop</h4>
+                        <p class="gallery-description">Women learning practical skills in soap production for sustainable livelihoods</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item" data-category="education">
+                    <img src="images/gallery-school1.jpg" alt="New School Construction" class="gallery-img" loading="lazy" onerror="this.src='images/suc2.jpeg'">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Education</span>
+                        <h4 class="gallery-title">School Opening Ceremony</h4>
+                        <p class="gallery-description">Community celebration for the opening of a new school building</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item" data-category="community">
+                    <img src="images/gallery-ramadan1.jpg" alt="Ramadan Food Distribution" class="gallery-img" loading="lazy" onerror="this.src='images/ngo2.jpeg'">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Community Support</span>
+                        <h4 class="gallery-title">Ramadan Feeding Program</h4>
+                        <p class="gallery-description">Distributing nutritious meals to vulnerable families during holy month</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item" data-category="training">
+                    <img src="images/gallery-training2.jpg" alt="Entrepreneurship Training" class="gallery-img" loading="lazy" onerror="this.src='images/ngo3.jpeg'">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Training</span>
+                        <h4 class="gallery-title">Business Skills Workshop</h4>
+                        <p class="gallery-description">Participants learning financial management and business planning</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item" data-category="success">
+                    <img src="images/gallery-success1.jpg" alt="Graduation Ceremony" class="gallery-img" loading="lazy" onerror="this.src='images/ngo4.jpeg'">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Success Stories</span>
+                        <h4 class="gallery-title">Training Graduation Day</h4>
+                        <p class="gallery-description">Celebrating the achievements of women who completed skills training</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item" data-category="education">
+                    <img src="images/gallery-school2.jpg" alt="Students in Classroom" class="gallery-img" loading="lazy" onerror="this.src='images/ngo5.jpeg'">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Education</span>
+                        <h4 class="gallery-title">Learning in Action</h4>
+                        <p class="gallery-description">Students engaged in classroom activities at our new school</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 7 -->
+                <div class="gallery-item" data-category="events">
+                    <img src="images/gallery-event1.jpg" alt="Community Meeting" class="gallery-img" loading="lazy" onerror="this.src='images/ngo6.jpeg'">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Events</span>
+                        <h4 class="gallery-title">Community Consultation</h4>
+                        <p class="gallery-description">Engaging with community members to understand their needs</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 8 -->
+                <div class="gallery-item" data-category="success">
+                    <img src="images/gallery-success2.jpg" alt="Business Owner Success" class="gallery-img" loading="lazy" onerror="this.src='images/ngo7.jpeg'">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Success Stories</span>
+                        <h4 class="gallery-title">From Trainee to Entrepreneur</h4>
+                        <p class="gallery-description">Graduate showcasing products from her successful soap business</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 9 -->
+                <div class="gallery-item" data-category="community">
+                    <img src="images/gallery-community1.jpg" alt="Water Project" class="gallery-img" loading="lazy" onerror="this.src='images/ngo8.jpeg'">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Community Support</span>
+                        <h4 class="gallery-title">Clean Water Access</h4>
+                        <p class="gallery-description">Installing boreholes to provide clean drinking water for communities</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 10 -->
+                <div class="gallery-item" data-category="training">
+                    <img src="images/gallery-training3.jpg" alt="Digital Skills Training" class="gallery-img" loading="lazy" onerror="this.src='images/suc1.jpeg'">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Training</span>
+                        <h4 class="gallery-title">Digital Literacy Program</h4>
+                        <p class="gallery-description">Youth learning computer skills for better employment opportunities</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 11 -->
+                <div class="gallery-item" data-category="events">
+                    <img src="images/gallery-event2.jpg" alt="Volunteer Activity" class="gallery-img" loading="lazy" onerror="this.src='images/ngo1.jpeg'">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Events</span>
+                        <h4 class="gallery-title">Volunteer Day</h4>
+                        <p class="gallery-description">Community members and volunteers working together on local projects</p>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 12 -->
+                <div class="gallery-item" data-category="success">
+                    <img src="images/gallery-success3.jpg" alt="Family Success Story" class="gallery-img" loading="lazy" onerror="this.src='images/ngo2.jpeg'">
+                    <div class="gallery-overlay">
+                        <span class="gallery-category">Success Stories</span>
+                        <h4 class="gallery-title">Transformed Lives</h4>
+                        <p class="gallery-description">Family celebrating improved living conditions through our programs</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Gallery -->
+    <section class="video-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Video Stories</h2>
+                <p>Watch our impact unfold through these inspiring video stories</p>
+            </div>
+            <div class="video-grid">
+                <div class="video-item">
+                    <img src="images/video-thumb1.jpg" alt="Training Program Video" class="video-thumbnail" loading="lazy" onerror="this.src='images/ngo3.jpeg'">
+                    <div class="video-play" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="video-caption">
+                        <h4>Women's Empowerment Journey</h4>
+                        <p>Documentary on our soap making training program</p>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <img src="images/video-thumb2.jpg" alt="School Construction Video" class="video-thumbnail" loading="lazy" onerror="this.src='images/ngo4.jpeg'">
+                    <div class="video-play" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="video-caption">
+                        <h4>Building Dreams</h4>
+                        <p>Time-lapse of school construction project</p>
+                    </div>
+                </div>
+                <div class="video-item">
+                    <img src="images/video-thumb3.jpg" alt="Community Impact Video" class="video-thumbnail" loading="lazy" onerror="this.src='images/ngo5.jpeg'">
+                    <div class="video-play" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ">
+                        <i class="fas fa-play"></i>
+                    </div>
+                    <div class="video-caption">
+                        <h4>Community Transformation</h4>
+                        <p>Stories of change from program participants</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Stats -->
+    <section class="impact-stats">
+        <div class="container">
+            <div class="section-header">
+                <h2 style="color: var(--white);">Gallery by Numbers</h2>
+                <p style="color: rgba(255, 255, 255, 0.9);">A visual representation of our impact across Africa</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-number">500+</div>
+                    <div class="stat-text">Photos Captured</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">12</div>
+                    <div class="stat-text">Communities Documented</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-text">Success Stories</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-text">Documentary Videos</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Share Your Story</h2>
+            <p>Have photos or stories from our programs? Share them with us to be featured in our gallery</p>
+            <a href="contact.html?subject=Gallery+Submission" class="btn">Submit Your Photos</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <img src="images/logo.jpeg" alt="EAN Logo" class="logo-img" style="height: 60px;">
+                        <div class="logo-text">
+                            <h1 style="color: white; font-size: 1.5rem;">EAN</h1>
+                            <div class="tagline" style="color: var(--accent-yellow);">Empower Africa Network</div>
+                        </div>
+                    </div>
+                    <p>Driving sustainable livelihoods, inclusive growth, and long-term community resilience across Africa through skills development and entrepreneurship.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="programs.html">Our Programs</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="team.html">Our Team</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Photo Categories</h3>
+                    <ul>
+                        <li><a href="gallery.html#training">Skills Training</a></li>
+                        <li><a href="gallery.html#education">Education</a></li>
+                        <li><a href="gallery.html#community">Community Support</a></li>
+                        <li><a href="gallery.html#events">Events</a></li>
+                        <li><a href="gallery.html#success">Success Stories</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Great Accra, New Adenta</li>
+                        <li><i class="fas fa-phone"></i> <a href="tel:+233249679160" style="color: rgba(255, 255, 255, 0.8);">+233 24 967 9160</a></li>
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:info@empowerafricanetwork.org" style="color: rgba(255, 255, 255, 0.8);">info@empowerafricanetwork.org</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2023 Empower Africa Network. All rights reserved. | Empowering Africa Through Skills and Enterprise</p>
+                <p style="margin-top: 10px; font-size: 0.8rem;">All photos are property of Empower Africa Network</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <img src="" alt="" class="lightbox-img" id="lightboxImg">
+            <div class="lightbox-caption">
+                <h3 class="lightbox-title" id="lightboxTitle"></h3>
+                <p class="lightbox-description" id="lightboxDescription"></p>
+            </div>
+            <button class="lightbox-close" id="lightboxClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <button class="lightbox-nav lightbox-prev" id="lightboxPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="lightbox-nav lightbox-next" id="lightboxNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Video Modal -->
+    <div class="lightbox" id="videoModal">
+        <div class="lightbox-content">
+            <iframe id="videoPlayer" width="800" height="450" frameborder="0" allowfullscreen></iframe>
+            <button class="lightbox-close" id="videoClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Navigation Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+            const isExpanded = mainNav.classList.contains('active');
+            mobileMenuBtn.setAttribute('aria-expanded', isExpanded);
+            mobileMenuBtn.innerHTML = isExpanded 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on a link
+        const navLinks = document.querySelectorAll('#mainNav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Gallery Filter Functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filterValue = button.getAttribute('data-filter');
+                
+                galleryItems.forEach(item => {
+                    if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+                        item.style.display = 'block';
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, 100);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
+            });
+        });
+
+        // Lightbox Functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxTitle = document.getElementById('lightboxTitle');
+        const lightboxDescription = document.getElementById('lightboxDescription');
+        const lightboxClose = document.getElementById('lightboxClose');
+        const lightboxPrev = document.getElementById('lightboxPrev');
+        const lightboxNext = document.getElementById('lightboxNext');
+
+        let currentImageIndex = 0;
+        let images = [];
+
+        // Collect all gallery images
+        galleryItems.forEach((item, index) => {
+            const img = item.querySelector('.gallery-img');
+            const title = item.querySelector('.gallery-title').textContent;
+            const description = item.querySelector('.gallery-description').textContent;
+            
+            images.push({
+                src: img.src,
+                title: title,
+                description: description
+            });
+
+            item.addEventListener('click', () => {
+                openLightbox(index);
+            });
+        });
+
+        function openLightbox(index) {
+            currentImageIndex = index;
+            lightboxImg.src = images[index].src;
+            lightboxTitle.textContent = images[index].title;
+            lightboxDescription.textContent = images[index].description;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function showPrevImage() {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            openLightbox(currentImageIndex);
+        }
+
+        function showNextImage() {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            openLightbox(currentImageIndex);
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxPrev.addEventListener('click', showPrevImage);
+        lightboxNext.addEventListener('click', showNextImage);
+
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowLeft') showPrevImage();
+                if (e.key === 'ArrowRight') showNextImage();
+            }
+        });
+
+        // Video Player Functionality
+        const videoModal = document.getElementById('videoModal');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const videoClose = document.getElementById('videoClose');
+        const videoPlayButtons = document.querySelectorAll('.video-play');
+
+        videoPlayButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const videoUrl = button.getAttribute('data-video');
+                videoPlayer.src = videoUrl;
+                videoModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        videoClose.addEventListener('click', () => {
+            videoModal.classList.remove('active');
+            videoPlayer.src = '';
+            document.body.style.overflow = 'auto';
+        });
+
+        videoModal.addEventListener('click', (e) => {
+            if (e.target === videoModal) {
+                videoModal.classList.remove('active');
+                videoPlayer.src = '';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Focus management for accessibility
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                mainNav.classList.remove('active');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                closeLightbox();
+                videoModal.classList.remove('active');
+                videoPlayer.src = '';
+            }
+        });
+
+        // Add loading lazy to all images
+        document.querySelectorAll('img').forEach(img => {
+            if (!img.hasAttribute('loading')) {
+                img.setAttribute('loading', 'lazy');
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Update filter if it's a category link
+                    if (targetId.includes('training') || targetId.includes('education') || 
+                        targetId.includes('community') || targetId.includes('events') || 
+                        targetId.includes('success')) {
+                        const category = targetId.substring(1);
+                        const filterBtn = document.querySelector(`.filter-btn[data-filter="${category}"]`);
+                        if (filterBtn) {
+                            filterBtn.click();
+                        }
+                    }
+                    
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 120,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
